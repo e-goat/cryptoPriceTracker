@@ -2,12 +2,11 @@ $(document).ready(function () {
     getDailyPrices(); 
     createTable(); 
 });
-
-let output;
-let dateOfCreation = '';
+var output;
+var dateOfCreation = '';
 let coinMetas = [];
 let allCoinsArray = [];
-let ajaxCalls = {};
+var ajaxCalls = {};
 let newCount = 0;
 
 const coinID = ['bitcoin', 'ethereum', 'cardano', 'polkadot', 'dogecoin', 'shiba-inu', 'ripple','neo', 'stellar', 'solana'];
@@ -53,21 +52,29 @@ function getDailyPrices() {
 } 
 
 function createTable() {
-    $.when(ajaxCalls[newCount]).done(()=>{
+    console.log(newCount)
+    $.when(ajaxCalls[10]).done(()=>{
         allCoinsArray.push(coinMetas);
+        sortByKey(allCoinsArray[0],"rank")
         for (var eachCoin = 0; eachCoin < newCount; eachCoin++){
             output +=`
             <tr class="coin-row">
               <th scope="row" class="table-dark">${allCoinsArray[0][eachCoin].rank}</th>
               <th scope="row" class="table-dark ${allCoinsArray[0][eachCoin].name}-row"><img src="${allCoinsArray[0][eachCoin].logo}" class="coin-icon"/> ${allCoinsArray[0][eachCoin].name}</th>
-              <th scope="row" class="table-dark">${allCoinsArray[0][eachCoin].vs_currency}</th>
-              <th scope="row" class="table-dark">${allCoinsArray[0][eachCoin].price}</th>
-              <th scope="row" class="table-dark">${allCoinsArray[0][eachCoin].creationDate}</th>
+              <th scope="row" class="table-dark">$ ${allCoinsArray[0][eachCoin].price}</th>
+              <th scope="row" class="table-dark">${allCoinsArray[0][eachCoin].creationDate ? allCoinsArray[0][eachCoin].creationDate : "N/A" }</th>
             </tr>`;  
-
+          
         }
         $(".price-list").slideDown(300, function () {
             $( this ).append( output );
-        });    
+        });
+    });
+}
+
+function sortByKey(array, key) {
+    return array.sort(function(a, b) {
+        var x = a[key]; var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
     });
 }
