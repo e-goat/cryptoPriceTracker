@@ -2,11 +2,12 @@ $(document).ready(function () {
     getDailyPrices(); 
     createTable(); 
 });
-var output;
-var dateOfCreation = '';
+
+let output;
+let dateOfCreation = '';
 let coinMetas = [];
 let allCoinsArray = [];
-var ajaxCalls = {};
+let ajaxCalls = {};
 let newCount = 0;
 
 const coinID = ['bitcoin', 'ethereum', 'cardano', 'polkadot', 'dogecoin', 'shiba-inu', 'ripple','neo', 'stellar', 'solana'];
@@ -52,8 +53,7 @@ function getDailyPrices() {
 } 
 
 function createTable() {
-    console.log(newCount)
-    $.when(ajaxCalls[10]).done(()=>{
+    $.when(ajaxCalls[newCount]).done(()=>{
         allCoinsArray.push(coinMetas);
         for (var eachCoin = 0; eachCoin < newCount; eachCoin++){
             output +=`
@@ -64,9 +64,10 @@ function createTable() {
               <th scope="row" class="table-dark">${allCoinsArray[0][eachCoin].price}</th>
               <th scope="row" class="table-dark">${allCoinsArray[0][eachCoin].creationDate}</th>
             </tr>`;  
-            $(".price-list").slideDown(300, function () {
-                $( this ).append( output );
-            });
+
         }
+        $(".price-list").slideDown(300, function () {
+            $( this ).append( output );
+        });    
     });
 }
