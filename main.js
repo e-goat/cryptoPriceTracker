@@ -46,7 +46,7 @@ function getDailyPrices() {
                 console.log(err);
             }
         }).done(function(data){
-            console.log(data);
+            // console.log(data);
             for (var i=0; i< data.tickers.length; i++){
                 if ( data.market_cap_rank !== null && data.tickers[i].target == 'USD') {
                     coinMetas.push({
@@ -75,7 +75,7 @@ function sortByRank(array, key) {
 //Dynamically create table rows
 function createTable() {
     $.when(ajaxCall[newCount]).done(()=>{
-        console.log('counter is ' + newCount);
+        // console.log('counter is ' + newCount);
         allCoinsArray.push(coinMetas);
         sortByRank(allCoinsArray[0],"rank")
         for (var eachCoin = 0; eachCoin < newCount; eachCoin++){
@@ -88,9 +88,9 @@ function createTable() {
             </tr>`;  
           
         }
-        console.log('final ajax call is done');
+        // console.log('final ajax call is done');
     }).then(()=>{
-        console.log('final ajax call failed');
+        // console.log('final ajax call failed');
         $( ".price-list" ).append( output );
     });
 }
