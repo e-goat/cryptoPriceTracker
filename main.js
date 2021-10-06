@@ -1,21 +1,39 @@
-$(document).ready(function () {
-    getDailyPrices(); 
+jQuery(function () {
+    getDailyPrices();
     createTable(); 
 });
+
 var output;
 var dateOfCreation = '';
 let coinMetas = [];
 let allCoinsArray = [];
-var ajaxCalls = {};
+var ajaxCall = {};
 let newCount = 0;
 
-const coinID = ['bitcoin', 'ethereum', 'cardano', 'polkadot', 'dogecoin', 'shiba-inu', 'ripple','neo', 'stellar', 'solana'];
+const coinID = 
+['bitcoin', 
+'ethereum', 
+'cardano', 
+'polkadot', 
+'dogecoin', 
+'shiba-inu', 
+'ripple', 
+'neo', 
+'stellar', 
+'solana',
+'zcash',
+'umi',
+'dash',
+'iota',
+'tezos',
+'uniswap'];
 
+//API call/s depending on the ammount of coin names set in coinID array. 
+//Upon success, ajax is building independent object called coinMetas.
 function getDailyPrices() {
-    let request;
     $($(coinID).get().reverse()).each((index,id)=>{
         newCount++
-        ajaxCalls[newCount] = $.ajax({   
+        ajaxCall[newCount] = $.ajax({   
             url: `https://api.coingecko.com/api/v3/coins/${id}?tickers=true&market_data=true&community_data=true&developer_data=true&sparkline=true&days=1`,   
             dataType: "json",
             method: "GET",
@@ -28,12 +46,7 @@ function getDailyPrices() {
                 console.log(err);
             }
         }).done(function(data){
-            if (data.genesis_date !== null) {
-                dateOfCreation = data.genesis_date;
-            } else {
-                dateOfCreation = "Not available";
-            }
-            
+            console.log(data);
             for (var i=0; i< data.tickers.length; i++){
                 if ( data.market_cap_rank !== null && data.tickers[i].target == 'USD') {
                     coinMetas.push({
@@ -51,30 +64,33 @@ function getDailyPrices() {
     });
 } 
 
+//Sort the price list by rank sequence
+function sortByRank(array, key) {
+    return array.sort(function(a, b) {
+        var x = a[key]; var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
+}
+
+//Dynamically create table rows
 function createTable() {
-    console.log(newCount)
-    $.when(ajaxCalls[10]).done(()=>{
+    $.when(ajaxCall[newCount]).done(()=>{
+        console.log('counter is ' + newCount);
         allCoinsArray.push(coinMetas);
-        sortByKey(allCoinsArray[0],"rank")
+        sortByRank(allCoinsArray[0],"rank")
         for (var eachCoin = 0; eachCoin < newCount; eachCoin++){
             output +=`
             <tr class="coin-row">
               <th scope="row" class="table-dark">${allCoinsArray[0][eachCoin].rank}</th>
-              <th scope="row" class="table-dark ${allCoinsArray[0][eachCoin].name}-row"><img src="${allCoinsArray[0][eachCoin].logo}" class="coin-icon"/> ${allCoinsArray[0][eachCoin].name}</th>
+              <th scope="row" class="table-dark row-${allCoinsArray[0][eachCoin].name}" value="${allCoinsArray[0][eachCoin].name}"><img src="${allCoinsArray[0][eachCoin].logo}" class="coin-icon"/> ${allCoinsArray[0][eachCoin].name}</th>
               <th scope="row" class="table-dark">$ ${allCoinsArray[0][eachCoin].price}</th>
               <th scope="row" class="table-dark">${allCoinsArray[0][eachCoin].creationDate ? allCoinsArray[0][eachCoin].creationDate : "N/A" }</th>
             </tr>`;  
           
         }
-        $(".price-list").slideDown(300, function () {
-            $( this ).append( output );
-        });
-    });
-}
-
-function sortByKey(array, key) {
-    return array.sort(function(a, b) {
-        var x = a[key]; var y = b[key];
-        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        console.log('final ajax call is done');
+    }).then(()=>{
+        console.log('final ajax call failed');
+        $( ".price-list" ).append( output );
     });
 }
