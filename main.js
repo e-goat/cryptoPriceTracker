@@ -1,6 +1,6 @@
 jQuery(function () {
     getDailyPrices();
-    createTable(); 
+    // createTable(); 
 });
 
 var output;
@@ -11,7 +11,8 @@ var ajaxCall = {};
 let newCount = 0;
 
 const coinID = 
-['bitcoin', 
+[
+'bitcoin', 
 'ethereum', 
 'cardano', 
 'polkadot', 
@@ -26,13 +27,13 @@ const coinID =
 'dash',
 'iota',
 'tezos',
-'uniswap'];
+'uniswap'
+];
 
 //API call/s depending on the ammount of coin names set in coinID array. 
 //Upon success, ajax is building independent object called coinMetas.
 function getDailyPrices() {
     $($(coinID).get().reverse()).each((index,id)=>{
-        newCount++
         ajaxCall[newCount] = $.ajax({   
             url: `https://api.coingecko.com/api/v3/coins/${id}?tickers=true&market_data=true&community_data=true&developer_data=true&sparkline=true&days=1`,   
             dataType: "json",
@@ -46,7 +47,9 @@ function getDailyPrices() {
                 console.log(err);
             }
         }).done(function(data){
-            // console.log(data);
+            newCount++
+            console.log(newCount + ': ' + 'data for each api call');
+            console.log(data);
             for (var i=0; i< data.tickers.length; i++){
                 if ( data.market_cap_rank !== null && data.tickers[i].target == 'USD') {
                     coinMetas.push({
@@ -62,6 +65,8 @@ function getDailyPrices() {
             }
         });
     });
+    return createTable();
+
 } 
 
 //Sort the price list by rank sequence
@@ -73,11 +78,14 @@ function sortByRank(array, key) {
 }
 
 //Dynamically create table rows
-function createTable() {
+function createTable(value, index) {
     $.when(ajaxCall[newCount]).done(()=>{
-        // console.log('counter is ' + newCount);
+        console.log('counter after all successful ajax calls is ' + newCount);
+
+        // console.log('final ajax call is done');
+    }).then(()=>{
         allCoinsArray.push(coinMetas);
-        sortByRank(allCoinsArray[0],"rank")
+        sortByRank(allCoinsArray[0],"rank");
         for (var eachCoin = 0; eachCoin < newCount; eachCoin++){
             output +=`
             <tr class="coin-row">
@@ -88,9 +96,7 @@ function createTable() {
             </tr>`;  
           
         }
-        // console.log('final ajax call is done');
-    }).then(()=>{
-        // console.log('final ajax call failed');
+
         $( ".price-list" ).append( output );
     });
 }
