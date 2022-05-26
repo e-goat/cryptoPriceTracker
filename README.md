@@ -1,2 +1,2 @@
 # cryptoPriceTracker
-Small crypto pricing tracking tool
+Small crypto tracking tool
