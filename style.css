@@ -21,3 +21,12 @@ body::-webkit-scrollbar {
     outline: 1px solid slategrey;
   }
 
+  .coin-row{
+    opacity: 0.75;
+    /* pointer-events: none; */
+  }
+
+  .coin-row:hover {
+    opacity: 1;
+  }
+
