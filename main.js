@@ -1,16 +1,17 @@
 jQuery(function () {
     'use strict'
-    let output,
-        coinMeta = [],
-        allCoinsArray = [],
-        ajaxCall = {},
-        newCount = 0,
-        coinID = [];
+
+    let output          = null,
+        newCount        = null,
+        coinID          = [],
+        ajaxCallObj     = {},
+        coinMeta        = [],
+        allCoinsArray   = [];
 
     //Sort array by rank
-    function sortByRank(array, key) {
-        return array.sort(function(a, b) {
-            var x = a[key], 
+    let sortByRank = (array, key) => {
+        return array.sort((a, b) => {
+            let x = a[key], 
                 y = b[key];
 
             return ((x < y) ? -1 : ((x > y) ? 1 : 0));
@@ -22,56 +23,53 @@ jQuery(function () {
         dataType: 'json',
         method: 'GET',
         statusCode: {
-            404: function() {
+            404: () => {
                 alert('Error 404')
             }
         },
         data: {
             'Access-Control-Allow-Origin':'cors',
         },
-        success: function(response) {
-            let coinsLength = response.length;
-            let data = response;
+        success: response => {
+            let coinsLength = response.length,
+                data        = response;
 
             return [...Array(coinsLength)].forEach((element, index) => {
                 coinID.push( data[index].id );
             });
-            // for ( var i = 0; i <= coinsLength - 1; i++ ) {
-            //     coinID.push( data[i].id );
-            // }
         },
-        error: function(err) {
+        error: err => {
             console.log(err);
         },
     })
-    .done( function() { 
+    .done(() => { 
         return getPrices(); 
     });
 
 
     //API call/s depending on the ammount of coin names set in coinID array. 
     //Upon success, ajax is building independent object called coinMeta.
-    function getPrices() {
-        $($(coinID).get().reverse()).each((_,id) => {
-            ajaxCall[newCount] = $.ajax({   
+    let getPrices = () => {
+        $( $(coinID).get().reverse() ).each((_,id) => {
+            ajaxCallObj[newCount] = $.ajax({
                 url: `https://api.coingecko.com/api/v3/coins/${id}?tickers=true&market_data=true&community_data=true&developer_data=true&sparkline=true&days=1`,   
                 dataType: "json",
                 method: "GET",
                 statusCode: {
-                    404: function() {
+                    404: () => {
                         alert('404 Error');
                     },
                 },
                 data: {
                     'Access-Control-Allow-Origin':'cors',
                 },
-                success: function(response) {
+                success: response => {
                     // console.log(response);
                 },
-                error: function(err) {
+                error: err => {
                     console.log(err);
                 }
-            }).done(function(data){
+            }).done((data) => {
                 newCount++
                 for (var i=0; i< data.tickers.length; i++){
                     if ( data.market_cap_rank !== null && data.tickers[i].target == 'USD') {
@@ -91,13 +89,12 @@ jQuery(function () {
                 }
             });
         });
-        
         return createTable();
     } 
 
     //Dynamically create table rows
-    function createTable() {
-        $.when(ajaxCall[newCount])
+    let createTable = () => {
+        $.when(ajaxCallObj[newCount])
             .then(()=>{
                 allCoinsArray.push(coinMeta);
                 sortByRank(allCoinsArray[0],"rank");
@@ -111,6 +108,7 @@ jQuery(function () {
                             currency    = allCoinsArray[0][eachCoin].vs_currency,
                             trade_on    = allCoinsArray[0][eachCoin].trade_on,
                             exchange    = allCoinsArray[0][eachCoin].ex_name;
+                        
                         output += 
                         `<tr class="coin-row">
                             <th scope="row" class="table-dark rank">${rank}</th>
