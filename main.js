@@ -1,6 +1,5 @@
 jQuery(function () {
     'use strict'
-
     let output,
         coinMeta = [],
         allCoinsArray = [],
@@ -76,13 +75,16 @@ jQuery(function () {
                 newCount++
                 for (var i=0; i< data.tickers.length; i++){
                     if ( data.market_cap_rank !== null && data.tickers[i].target == 'USD') {
+                        console.log(data)
                         coinMeta.push({
-                            rank: data.market_cap_rank,
-                            name: data.name,
-                            logo: data.image.thumb,
-                            vs_currency: data.tickers[i].target,
-                            price: data.tickers[i].last,
-                            creationDate: data.genesis_date
+                            rank:           data.market_cap_rank,
+                            name:           data.name,
+                            logo:           data.image.thumb,
+                            trade_on:       data.tickers[i].trade_url,
+                            vs_currency:    data.tickers[i].target,
+                            price:          data.tickers[i].last,
+                            creationDate:   data.genesis_date,
+                            ex_name:        data.tickers[i].market.name,
                         });                    
                         break;
                     }   
@@ -106,13 +108,18 @@ jQuery(function () {
                             price       = allCoinsArray[0][eachCoin].price,
                             logo        = allCoinsArray[0][eachCoin].logo,
                             origin_date = allCoinsArray[0][eachCoin].creationDate,
-                            currency    = allCoinsArray[0][eachCoin].vs_currency;
+                            currency    = allCoinsArray[0][eachCoin].vs_currency,
+                            trade_on    = allCoinsArray[0][eachCoin].trade_on,
+                            exchange    = allCoinsArray[0][eachCoin].ex_name;
                         output += 
                         `<tr class="coin-row">
                             <th scope="row" class="table-dark rank">${rank}</th>
                             <th scope="row" class="table-dark name-${name}" value="name"><img src="${logo}" class="coin-icon"/> ${name}</th>
-                            <th scope="row" class="table-dark price">$ ${price}</th>
+                            <th scope="row" class="table-dark price">${currency} ${price}</th>
                             <th scope="row" class="table-dark creation-date">${origin_date != null ? origin_date : "N/A" }</th>
+                            <th scope="row" class="table-dark trade-on">
+                                <a href="${trade_on}" class="button" target="_blank">Trade on ${exchange}</a>
+                            </th>
                         </tr>`; 
                     }
                 }
