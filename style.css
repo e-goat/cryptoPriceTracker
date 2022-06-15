@@ -5,7 +5,7 @@
 }
 
 body{
-    background-color: #343a40!important;   
+    background-color: #343a40!important;  
 }
 
 body::-webkit-scrollbar {
@@ -19,6 +19,12 @@ body::-webkit-scrollbar {
   body::-webkit-scrollbar-thumb {
     background-color: darkgrey;
     outline: 1px solid slategrey;
+  }
+
+  table {
+    font-family: 'Akshar', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Quicksand', sans-serif; 
   }
 
   .coin-row{
