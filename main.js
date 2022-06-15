@@ -73,7 +73,6 @@ jQuery(function () {
                 newCount++
                 for (var i=0; i< data.tickers.length; i++){
                     if ( data.market_cap_rank !== null && data.tickers[i].target == 'USD') {
-                        console.log(data)
                         coinMeta.push({
                             rank:           data.market_cap_rank,
                             name:           data.name,
