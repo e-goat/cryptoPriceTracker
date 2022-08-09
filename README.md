@@ -1,1 +1,1 @@
-Small elegant tool written in jQuery. It displays the top 50 ranked crypto coins using the CoinGecko API.
+A tool written in jQuery that displays the top 50 ranked cryptos using the CoinGecko API.
