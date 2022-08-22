@@ -65,7 +65,7 @@ $(function () {
 
     // add this inside change event
     // note that the maximum number of ids available is 50
-    get_ids(3);
+    get_ids(10);
 
     //API call/s depending on the ammount of coin ids captured by get_ids()
     //Upon success, ajax is building independent object called coinMeta.
