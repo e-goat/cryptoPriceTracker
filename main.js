@@ -9,6 +9,9 @@ $(function () {
     coinMeta      = [],
     allCoinsArray = [];
 
+    //======================//
+    // * HELPER FUNCTIONS * //
+    //======================//
     //Sort array by rank
     let sortByRank = (array, key) => {
         return array.sort((a, b) => {
@@ -20,8 +23,17 @@ $(function () {
         });
     }
 
-    // ARG n PLAYS THE ROLE OF TOTAL COINS TO BE FETCH FROM API
-    let get_all_coins = ( n = 1 ) => {
+    //====================//
+    // * MAIN FUNCTIONS * //
+    //====================//
+    // Handle big numbers
+    let big_int_format = ( num = null ) => {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    // INITIATE MAIN FUNCTIONS
+    // arg -n- plays the role of coins to be called counter
+    let get_ids = (n = 1) => {
         $.ajax({
             url: 'https://api.coingecko.com/api/v3/coins/',
             dataType: 'json',
@@ -38,8 +50,7 @@ $(function () {
                 let
                 coinsLength = response.length,
                 data        = response;
-                // coinsLength use to get all coins data
-                // currently using only 1 index to call data for Bitcoin only
+
                 return [...Array(n)].forEach((element, index) => {
                     coinID.push( data[index].id );
                 });
@@ -52,10 +63,11 @@ $(function () {
         });
     }
 
-    // ADD THIS ON INPUT EVENT
-    get_all_coins();
+    // add this inside change event
+    // note that the maximum number of ids available is 50
+    get_ids(3);
 
-    //API call/s depending on the ammount of coin names set in coinID array. 
+    //API call/s depending on the ammount of coin ids captured by get_ids()
     //Upon success, ajax is building independent object called coinMeta.
     let get_prices = async () => {
         $( $(coinID).get().reverse() ).each((_,id) => {
@@ -98,15 +110,11 @@ $(function () {
                 }
             });
         });
+        // add loader here
         await create_table();
     }
 
-    // HANDLE BIG NUMBERS WITH COMMAS
-    let big_int_format = ( num = null ) => {
-        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    }
-
-    //Dynamically create table rows
+    //Dynamically create table rows based on coinMeta content
     let create_table = () => {
         $.when(ajaxCallObj[newCount])
             .then(()=>{
