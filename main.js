@@ -1,4 +1,4 @@
-jQuery(function () {
+$(function () {
     'use strict'
 
     let 
@@ -12,46 +12,52 @@ jQuery(function () {
     //Sort array by rank
     let sortByRank = (array, key) => {
         return array.sort((a, b) => {
-            let x = a[key], 
-                y = b[key];
+            let 
+            x = a[key],
+            y = b[key];
 
             return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         });
     }
 
-    $.ajax({
-        url: 'https://api.coingecko.com/api/v3/coins/',
-        dataType: 'json',
-        method: 'GET',
-        statusCode: {
-            404: () => {
-                alert('Error 404')
-            }
-        },
-        data: {
-            'Access-Control-Allow-Origin':'cors',
-        },
-        success: response => {
-            let 
-            coinsLength = response.length,
-            data        = response;
+    // ARG n PLAYS THE ROLE OF TOTAL COINS TO BE FETCH FROM API
+    let get_all_coins = ( n = 1 ) => {
+        $.ajax({
+            url: 'https://api.coingecko.com/api/v3/coins/',
+            dataType: 'json',
+            method: 'GET',
+            statusCode: {
+                404: () => {
+                    alert('Error 404')
+                }
+            },
+            data: {
+                'Access-Control-Allow-Origin':'cors',
+            },
+            success: response => {
+                let
+                coinsLength = response.length,
+                data        = response;
+                // coinsLength use to get all coins data
+                // currently using only 1 index to call data for Bitcoin only
+                return [...Array(n)].forEach((element, index) => {
+                    coinID.push( data[index].id );
+                });
+            },
+            error: err => {
+                console.log(err);
+            },
+        }).done(() => { 
+            return get_prices(); 
+        });
+    }
 
-            return [...Array(coinsLength)].forEach((element, index) => {
-                coinID.push( data[index].id );
-            });
-        },
-        error: err => {
-            console.log(err);
-        },
-    })
-    .done(() => { 
-        return getPrices(); 
-    });
-
+    // ADD THIS ON INPUT EVENT
+    get_all_coins();
 
     //API call/s depending on the ammount of coin names set in coinID array. 
     //Upon success, ajax is building independent object called coinMeta.
-    let getPrices = () => {
+    let get_prices = async () => {
         $( $(coinID).get().reverse() ).each((_,id) => {
             ajaxCallObj[newCount] = $.ajax({
                 url: `https://api.coingecko.com/api/v3/coins/${id}?tickers=true&market_data=true&community_data=true&developer_data=true&sparkline=true&days=1`,   
@@ -92,16 +98,16 @@ jQuery(function () {
                 }
             });
         });
-        return createTable();
+        await create_table();
     }
 
     // HANDLE BIG NUMBERS WITH COMMAS
-    let bigNumHelper = (num = null ) => {
+    let big_int_format = ( num = null ) => {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
 
     //Dynamically create table rows
-    let createTable = () => {
+    let create_table = () => {
         $.when(ajaxCallObj[newCount])
             .then(()=>{
                 allCoinsArray.push(coinMeta);
@@ -120,7 +126,7 @@ jQuery(function () {
                         market_cap   = allCoinsArray[0][eachCoin].market_cap,
                         total_supply = allCoinsArray[0][eachCoin].total_supply;
 
-                        // Transform ternary operator, not convenient enough but it works for US only.
+                        // Transform symbol with ternary operator, not convenient enough but it works.
                         currency == 'USD' ? currency = '$' : '';
 
                         output += 
@@ -129,7 +135,7 @@ jQuery(function () {
                             <th scope="row" class="table-dark name-${name}" value="name"><img src="${logo}" class="coin-icon"/> ${name}</th>
                             <th scope="row" class="table-dark price">${currency} ${price}</th>
                             <th scope="row" class="table-dark creation-date">${origin_date != null ? origin_date : "N/A" }</th>
-                            <th scope="row" class="table-dark market-cap">${currency} ${bigNumHelper(market_cap)}</th>
+                            <th scope="row" class="table-dark market-cap">${currency} ${big_int_format(market_cap)}</th>
                             <th scope="row" class="table-dark trade-on">
                                 <a href="${trade_on}" class="button" target="_blank">Trade on ${exchange}</a>
                             </th>
