@@ -68,7 +68,7 @@ $(function () {
     }
 
     // maximum coin IDs are 50. Change the param of get_ids() to get different number of coins.
-    get_ids(10);
+    get_ids(20);
 
     //API call/s depending on the ammount of coin ids captured by get_ids()
     //Upon success, ajax is building independent object called coinMeta.

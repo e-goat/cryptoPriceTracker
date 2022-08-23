@@ -41,7 +41,7 @@ table.coins-table {
   width: 75%;
   font-family: 'Akshar', sans-serif;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-family: 'Quicksand', sans-serif; 
+  font-family: 'Quicksand', sans-serif;
 }
 
 nav {
@@ -90,6 +90,12 @@ nav .right-nav {
 
   /* For mobile phones: */
   .coin-row th:nth-child(1) {
+    position: sticky;
+    left: -25px;
+    z-index: 100;
+  }
+
+  .header-name {
     position: sticky;
     left: -25px;
     z-index: 100;
