@@ -1,6 +1,7 @@
 $(function () {
     'use strict'
 
+    //GLOBAL VARIABLES
     let 
     output        = null,
     newCount      = null,
@@ -9,9 +10,11 @@ $(function () {
     coinMeta      = [],
     allCoinsArray = [];
 
+
     //======================//
     // * HELPER FUNCTIONS * //
     //======================//
+
     //Sort array by rank
     let sortByRank = (array, key) => {
         return array.sort((a, b) => {
@@ -23,16 +26,17 @@ $(function () {
         });
     }
 
-    //====================//
-    // * MAIN FUNCTIONS * //
-    //====================//
     // Handle big numbers
     let big_int_format = ( num = null ) => {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
 
-    // INITIATE MAIN FUNCTIONS
-    // arg -n- plays the role of coins to be called counter
+
+    //====================//
+    // * MAIN FUNCTIONS * //
+    //====================//
+
+    // arg -n- plays the role of number of coins to be called
     let get_ids = (n = 1) => {
         $.ajax({
             url: 'https://api.coingecko.com/api/v3/coins/',
@@ -63,8 +67,7 @@ $(function () {
         });
     }
 
-    // add this inside change event
-    // note that the maximum number of ids available is 50
+    // maximum coin IDs are 50. Change the param of get_ids() to get different number of coins.
     get_ids(10);
 
     //API call/s depending on the ammount of coin ids captured by get_ids()
@@ -139,8 +142,7 @@ $(function () {
 
                         output += 
                         `<tr class="coin-row">
-                            <th scope="row" class="table-dark rank">${rank}</th>
-                            <th scope="row" class="table-dark name-${name}" value="name"><img src="${logo}" class="coin-icon"/> ${name}</th>
+                            <th scope="row" class="table-dark name-${name}" value="name"><img src="${logo}" class="coin-icon"/> ${rank} ${name}</th>
                             <th scope="row" class="table-dark price">${currency} ${price}</th>
                             <th scope="row" class="table-dark creation-date">${origin_date != null ? origin_date : "N/A" }</th>
                             <th scope="row" class="table-dark market-cap">${currency} ${big_int_format(market_cap)}</th>
@@ -153,4 +155,15 @@ $(function () {
             return $( ".price-list" ).append( output );
         });
     }
+
+    //RESPOSIVE EVENTS
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            $('.coins-table').addClass('container')
+            $('.coins-table').removeClass('container-fluid')
+        } else {
+            $('.coins-table').addClass('container-fluid')
+            $('.coins-table').removeClass('container')
+        }
+    })
 });

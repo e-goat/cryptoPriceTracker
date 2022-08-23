@@ -81,3 +81,17 @@ nav .right-nav {
   opacity: 1;
 }
 
+
+/* ============== */
+/* RESPONSIVENESS */
+/* ============== */
+
+@media only screen and (max-width: 768px) {
+
+  /* For mobile phones: */
+  .coin-row th:nth-child(1) {
+    position: sticky;
+    left: -25px;
+    z-index: 100;
+  }
+}
