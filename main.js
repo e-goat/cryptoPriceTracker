@@ -66,7 +66,7 @@ $(function () {
             return get_prices(); 
         });
     }
-
+    // MERGED
     // maximum coin IDs are 50. Change the param of get_ids() to get different number of coins.
     get_ids(20);
 
