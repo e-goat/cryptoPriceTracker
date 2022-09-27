@@ -59,7 +59,7 @@ $(function () {
   $(".home-page").trigger("click");
   $(".home-page").on("click", (event) => {
     $(".coins-list").hide();
-
+    $(".loader").hide();
     $(".home-page-wrapper").show();
   });
 
@@ -68,7 +68,7 @@ $(function () {
   //=========================//
 
   // arg -n- plays the role of number of coins to be called
-  let get_ids = (n = 1) => {
+  let get_coin_ids = (n = 1) => {
     return $.ajax({
       url: "https://api.coingecko.com/api/v3/coins/",
       dataType: "json",
@@ -97,7 +97,7 @@ $(function () {
     });
   };
 
-  //API call/s depending on the ammount of coin ids captured by get_ids()
+  //API call/s depending on the ammount of coin ids captured by get_coin_ids()
   //Upon success, ajax is building independent object called coinMeta.
   let get_prices = async () => {
     $($(coinID).get().reverse()).each((_, id) => {
@@ -191,7 +191,7 @@ $(function () {
       });
   };
 
-  // Max coin IDs are 50. Change the param of get_ids() to get different number of coins.
+  // Max coin IDs are 50. Change the param of get_coin_ids() to get different number of coins.
   $(".gecko-list").on("click", (event) => {
     $(".coins-list").show();
     $(".loader").show();
@@ -204,8 +204,8 @@ $(function () {
     coinMeta = [];
     allCoinsArray = [];
 
-    // get_ids @param can be dynamic
-    return get_ids(25);
+    // get_coin_ids @param can be dynamic
+    return get_coin_ids(25);
   });
 
   //==============================//
