@@ -133,7 +133,7 @@ nav {
 }
 
 .roid-cat a img {
-  border-radius: 80% 60% 80% 60%;
+  border-radius: 50% 55% 70% 60%;
   /* margin: 1.6rem; */
   width: 35%;
   height: 25%;
@@ -142,7 +142,6 @@ nav {
 .roid-cat a img:hover {
   border: 1px solid #888888;
   border-radius: 80% 60% 80% 60%;
-  padding: 10px;
   box-shadow: 5px 10px #888888;
 }
 
