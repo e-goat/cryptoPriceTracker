@@ -9,7 +9,8 @@ $(function () {
     coinID = [],
     ajaxCallObj = {},
     coinMeta = [],
-    allCoinsArray = [];
+    allCoinsArray = [],
+    coins_num = 10;
 
   //======================//
   // * HELPER FUNCTIONS * //
@@ -62,6 +63,8 @@ $(function () {
     $(".loader").hide();
     $(".home-page-wrapper").show();
   });
+
+  $(".coins-num").text(coins_num.toString())
 
   //=== ======================//
   // * GECKO API FUNCTIONS * //
@@ -205,7 +208,7 @@ $(function () {
     allCoinsArray = [];
 
     // get_coin_ids @param can be dynamic
-    return get_coin_ids(25);
+    return get_coin_ids(coins_num);
   });
 
   //==============================//
