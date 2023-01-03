@@ -4,21 +4,22 @@ $(function () {
   //======================//
   // * GLOBAL VARIABELS * //
   //======================//
-  var output = "",
+  let output = "",
     newCount = null,
     coinID = [],
     ajaxCallObj = {},
     coinMeta = [],
     allCoinsArray = [],
-    coins_num = 10;
+    coins_num = 25;
 
   //======================//
   // * HELPER FUNCTIONS * //
   //======================//
   let devExp = () => {
-    let startDate = new Date(2020, 1, 20);
-    let currentDate = new Date();
-    let expDate = currentDate.getFullYear() - startDate.getFullYear();
+    let startDate = new Date(2020, 1, 20),
+      currentDate = new Date(),
+      expDate = currentDate.getFullYear() - startDate.getFullYear();
+
     return expDate.toLocaleString();
   };
   // Get dynamic number of experience as developer
@@ -53,16 +54,6 @@ $(function () {
       event.target.className += " active";
     });
   }
-
-  //======================//
-  // * HOME PAGE EVENTS * //
-  //======================//
-  $(".home-page").trigger("click");
-  $(".home-page").on("click", (event) => {
-    $(".coins-list").hide();
-    $(".loader").hide();
-    $(".home-page-wrapper").show();
-  });
 
   $(".coins-num").text(coins_num.toString())
 
@@ -125,10 +116,7 @@ $(function () {
       }).done((data) => {
         newCount++;
         for (var i = 0; i < data.tickers.length; i++) {
-          if (
-            data.market_cap_rank !== null &&
-            data.tickers[i].target == "USD"
-          ) {
+          if (data.market_cap_rank !== null && data.tickers[i].target == "USD") {
             coinMeta.push({
               rank: data.market_cap_rank,
               name: data.name,
@@ -172,19 +160,16 @@ $(function () {
             // Transform symbol with ternary operator, not convenient enough but it works.
             currency == "USD" ? (currency = "$") : "";
 
-            output += `<tr class="coin-row">
-                            <th scope="row" class="table-dark name-${name}" value="name"><img src="${logo}" class="coin-icon"/> ${rank} ${name}</th>
-                            <th scope="row" class="table-dark price">${currency} ${price}</th>
-                            <th scope="row" class="table-dark creation-date">${
-                              origin_date != null ? origin_date : "N/A"
-                            }</th>
-                            <th scope="row" class="table-dark market-cap">${currency} ${big_int_format(
-              market_cap
-            )}</th>
-                            <th scope="row" class="table-dark trade-on">
-                                <a href="${trade_on}" class="button" target="_blank">Trade on ${exchange}</a>
-                            </th>
-                        </tr>`;
+            output +=
+              `<tr class="coin-row">
+                <th scope="row" class="table-dark name-${name}" value="name"><img src="${logo}" class="coin-icon"/> ${rank} ${name}</th>
+                <th scope="row" class="table-dark price">${currency} ${price}</th>
+                <th scope="row" class="table-dark creation-date">${origin_date != null ? origin_date : "N/A"}</th>
+                <th scope="row" class="table-dark market-cap">${currency} ${big_int_format(market_cap)}</th>
+                <th scope="row" class="table-dark trade-on">
+                    <a href="${trade_on}" class="button" target="_blank">Trade on ${exchange}</a>
+                </th>
+            </tr>`;
           }
         }
         return $(".price-list").append(output);
