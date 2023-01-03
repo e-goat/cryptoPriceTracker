@@ -175,6 +175,18 @@ content h3 ol {
   box-shadow: 5px 10px #888888;
 }
 
+.dev-langs-list a, .dev-langs-list a:hover, .dev-langs-list a:visited, .dev-langs-list a:focus, .dev-langs-list a:active  {
+  text-decoration: none;
+  color: inherit;
+  outline: 0;
+  cursor: pointer;
+}
+
+.dev-langs-list a:hover {
+  color: #666;
+  transition: 0.1s ease-in;
+}
+
 /* ============== */
 /* RESPONSIVENESS */
 /* ============== */

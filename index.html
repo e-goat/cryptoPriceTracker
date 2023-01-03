@@ -1,115 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>eden</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <link rel="stylesheet" href="style.css" />
-    <link
-      rel="shortcut icon"
-      href="media/favicon-egoat-2.jpg"
-      type="image/jpg"
-    />
-    <script
-      src="https://code.jquery.com/jquery-3.6.0.js"
-      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-      crossorigin="anonymous"
-    ></script>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Akshar:wght@700&family=Plus+Jakarta+Sans:ital,wght@0,200;1,300&family=Quicksand:wght@300&display=swap"
-      rel="stylesheet"
-    />
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-  </head>
-  <nav class="navbar navbar-expand-lg navbar-dark">
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarNavDropdown"
-      aria-controls="navbarNavDropdown"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
-        <li class="nav-item home-page">
-          <a class="nav-link" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item gecko-list">
-          <a class="nav-link" href="#" aria-current="page">CoinGecko</a>
-        </li>
-      </ul>
+
+<head>
+  <title>eden</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="shortcut icon" href="media/favicon-egoat-2.jpg" type="image/jpg" />
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Akshar:wght@700&family=Plus+Jakarta+Sans:ital,wght@0,200;1,300&family=Quicksand:wght@300&display=swap"
+    rel="stylesheet" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+</head>
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item home-page">
+        <a class="nav-link" aria-current="page" href="#">Home</a>
+      </li>
+      <li class="nav-item gecko-list">
+        <a class="nav-link" href="#" aria-current="page">CoinGecko</a>
+      </li>
+      <!-- nav-item -->
+      <li class=" donate-page">
+        <a class="nav-link disabled" href="#">Donate</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!-- /header -->
+<!-- MERGED -->
+
+<body>
+  <div class="loader"></div>
+
+  <div class="container main-wrapper">
+    <div class="coins-list">
+      <table class="container table table-responsive-md">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col" class="header-name">Name</th>
+            <th scope="col" class="header-price">Current Price</th>
+            <th scope="col" class="header-date">Genesis Date</th>
+            <th scope="col" class="header-market-cap">Market Cap</th>
+            <th scope="col" class="header-trade-on">Trade</th>
+          </tr>
+        </thead>
+        <tbody class="price-list"></tbody>
+      </table>
     </div>
-  </nav>
-  <!-- /header -->
-  <!-- MERGED -->
 
-  <body>
-    <div class="loader"></div>
-
-    <div class="container main-wrapper">
-      <div class="coins-list">
-        <table class="container table table-responsive-md">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col" class="header-name">Name</th>
-              <th scope="col" class="header-price">Current Price</th>
-              <th scope="col" class="header-date">Genesis Date</th>
-              <th scope="col" class="header-market-cap">Market Cap</th>
-              <th scope="col" class="header-trade-on">Trade</th>
-            </tr>
-          </thead>
-          <tbody class="price-list"></tbody>
-        </table>
-      </div>
-
-      <div class="container home-page-wrapper">
-        <div class="roid-cat">
-          <h1>Welcome to my portfolio.</h1>
-          <br /><br />
-          <div class="content-row container">
-            <a
-              href="https://github.com/e-goat/cryptoPriceTracker"
-              target="_blank"
-              aria-current="page"
-              ><img class="float-left" src="./media/octocat.png" alt="octocat"
-            /></a>
-            <div class="content">
-              My name is Martin Duchev &amp; I'm web developer with
-              <span class="dev-experience"></span> years of experience. I've
-              been working on multiple projects using the following
-              technologies: <br /><br />
-              HTML<br />
-              Vanilla Javascript<br />
-              jQuery<br />
-              React <br />
-              CSS & SASS <br />
-              Wordpress<br />
-              PHP 6+<br />
-              UNIX <br />
-              Experience with version control systems
-            </div>
+    <div class="container home-page-wrapper">
+      <div class="roid-cat">
+        <h1>Welcome to my portfolio.</h1>
+        <br /><br />
+        <div class="content-row container">
+          <a href="https://github.com/e-goat/cryptoPriceTracker" target="_blank" aria-current="page"><img
+              class="float-left" src="./media/octocat.png" alt="octocat" /></a>
+          <div class="content">
+            My name is Martin Duchev &amp; I'm web developer with
+            <span class="dev-experience"></span> years of experience. I've
+            been working on multiple projects using the following
+            technologies: <br /><br />
+            <span class="dev-langs-list">
+              <a href="https://www.w3schools.com/html/default.asp" target="_blank">HTML</a><br />
+              <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">Vanilla Javascript</a><br />
+              <a href="https://api.jquery.com/" target="_blank">jQuery</a><br />
+              <a href="https://reactjs.org/docs/getting-started.html" target="_blank">React</a> <br />
+              <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">CSS</a> & <a href="https://sass-lang.com/documentation/" target="_blank">SASS</a> <br />
+              <a href="https://developer.wordpress.com/docs/" target="_blank">Wordpress</a><br />
+              <a href="https://www.php.net/docs.php" target="_blank">PHP 6+</a><br />
+              <a href="https://unixguide.readthedocs.io/en/latest/unixcheatsheet/index.html" target="_blank">UNIX</a> <br />
+              <a href="https://git-scm.com/doc" target="_blank">GIT</a> <br />
+            </span>
           </div>
+<<<<<<< HEAD
           <div class="content-row container">
             <div class="content">
               This is app displays most of the top crypto currencies fetched
@@ -119,44 +97,48 @@
               between 1-50.
               <br />
               <br />
+=======
+        </div>
+        <div class="content-row container">
+          <div class="content">
+            This is app displays most of the top crypto currencies fetched
+            from CoinGecko API. The <i>number</i> of displayed currencies is
+            controlled via <kbd>let coins_num = <span class="coins-num"></span></kbd> function. In this case
+            the total number of displayed coins would be <span class="coins-num"></span> but it can be adjusted
+            dynamically in
+            between 1-50 (the free API cap is 50).
+            <br />
+            <br />
+>>>>>>> a90be52 (Code refactor)
 
-              This app is written for learning purposes only and if you like to
-              contribute to this project simply click on the cat. <br />
-              OR if you want to personaly share any ideas with me, then you can
-              send me an email here:
-              <a href="mailto:duchevmartin@gmail.com"
-                ><i>duchevmartin@gmail.com</i></a
-              >
-            </div>
+            This app is written for learning purposes only and if you like to
+            contribute to this project simply click on the cat. <br />
+            OR if you want to personaly share any ideas with me, then you can
+            send me an email here:
+            <a href="mailto:duchevmartin@gmail.com"><i>duchevmartin@gmail.com</i></a>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
-    <script src="main.js"></script>
-  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="./assets/gecko.js"></script>
+  <script src="./assets/donate.js"></script>
+  <script src="./assets/home.js"></script>
+</body>
 
-  <footer
-    class="page-footer pt-4"
-    style="background-color: rgb(92, 82, 45), 0.753"
-  >
-    <!-- Copyright -->
-    <div class="text-center p-3 text-white">
-      © Powered by
-      <a class="text-white" href="https://www.coingecko.com/en" target="_blank"
-        >CoinGecko</a
-      >
-    </div>
-    <!-- Copyright -->
-  </footer>
+<footer class="page-footer pt-4" style="background-color: rgb(92, 82, 45), 0.753">
+  <!-- Copyright -->
+  <div class="text-center p-3 text-white">© Powered by
+    <a class="text-white" href="https://www.coingecko.com/en" target="_blank">CoinGecko</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+
 </html>
