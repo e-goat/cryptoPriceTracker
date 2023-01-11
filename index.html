@@ -7,7 +7,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="stylesheet" href="style.css" />
-  <link rel="shortcut icon" href="media/favicon-egoat-2.jpg" type="image/jpg" />
+  <link rel="shortcut icon" href="media/favicon.jpg" type="image/jpg" />
   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
     crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
@@ -47,6 +47,7 @@
 <body>
   <div class="loader"></div>
 
+  <!-- GECKO COINS LIST -->
   <div class="container main-wrapper">
     <div class="coins-list">
       <table class="container table table-responsive-md">
@@ -63,29 +64,28 @@
       </table>
     </div>
 
+    <!-- HOME PAGE -->
     <div class="container home-page-wrapper">
       <div class="roid-cat">
-        <h1>Welcome to my portfolio.</h1>
-        <br /><br />
+        <p class="home-page-title">Welcome to my portfolio</p>
+        <img class="roid-cat-img img-fluid m-5" src="./media/octocat.png" alt="octocat" />
         <div class="content-row container">
-          <a href="https://github.com/e-goat/cryptoPriceTracker" target="_blank" aria-current="page"><img
-              class="float-left" src="./media/octocat.png" alt="octocat" /></a>
           <div class="content">
             My name is Martin Duchev &amp; I'm web developer with
-            <span class="dev-experience"></span> years of experience. I've
+            <span class="dev-experience"></span> years of experience. <br /> I've
             been working on multiple projects using the following
             technologies: <br /><br />
-            <span class="dev-langs-list">
-              <a href="https://www.w3schools.com/html/default.asp" target="_blank">HTML</a><br />
-              <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">Vanilla Javascript</a><br />
-              <a href="https://api.jquery.com/" target="_blank">jQuery</a><br />
-              <a href="https://reactjs.org/docs/getting-started.html" target="_blank">React</a> <br />
-              <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">CSS</a> & <a href="https://sass-lang.com/documentation/" target="_blank">SASS</a> <br />
-              <a href="https://developer.wordpress.com/docs/" target="_blank">Wordpress</a><br />
-              <a href="https://www.php.net/docs.php" target="_blank">PHP 6+</a><br />
-              <a href="https://unixguide.readthedocs.io/en/latest/unixcheatsheet/index.html" target="_blank">UNIX</a> <br />
-              <a href="https://git-scm.com/doc" target="_blank">GIT</a> <br />
-            </span>
+            <ul class="dev-langs-list">
+              <li><a href="https://www.w3schools.com/html/default.asp" target="_blank">HTML</a></li>
+              <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">Vanilla Javascript</a></li>
+              <li><a href="https://api.jquery.com/" target="_blank">jQuery</a></li>
+              <li><a href="https://reactjs.org/docs/getting-started.html" target="_blank">React</a></li> 
+              <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">CSS</a> & <a href="https://sass-lang.com/documentation/" target="_blank">SASS</a></li>
+              <li><a href="https://developer.wordpress.com/docs/" target="_blank">Wordpress</a></li>
+              <li><a href="https://www.php.net/docs.php" target="_blank">PHP 6+</a></li>
+              <li><a href="https://unixguide.readthedocs.io/en/latest/unixcheatsheet/index.html" target="_blank">UNIX</a></li> 
+              <li><a href="https://git-scm.com/doc" target="_blank">GIT</a></li>
+            </ul>
           </div>
         </div>
         <div class="content-row container">
@@ -103,7 +103,7 @@
             contribute to this project simply click on the cat. <br />
             OR if you want to personaly share any ideas with me, then you can
             send me an email here:
-            <a href="mailto:duchevmartin@gmail.com"><i>duchevmartin@gmail.com</i></a>
+            <span class="personal-email"><a href="mailto:duchevmartin@gmail.com"><i>duchevmartin@gmail.com</i></a></span>
           </div>
         </div>
       </div>

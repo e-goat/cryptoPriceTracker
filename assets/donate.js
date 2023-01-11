@@ -1,5 +1,5 @@
 window.addEventListener("load", () => {
-    "strict mode";
+    "use strict";
 
     //======================//
     // *      DONATE      * //

@@ -23,6 +23,22 @@ footer {
   word-wrap: break-word;
 }
 
+body a,
+body a:hover,
+body a:visited,
+body a:focus,
+body a:active  {
+  text-decoration: none;
+  color: inherit;
+  outline: 0;
+  cursor: pointer;
+}
+
+body a:hover {
+  color: #666;
+  transition: 0.1s ease-in;
+}
+
 code {
   background: #f4f4f4;
   border: 1px solid #ddd;
@@ -132,17 +148,32 @@ nav {
   opacity: 1;
 }
 
-.roid-cat a img {
-  border-radius: 50% 55% 70% 60%;
-  /* margin: 1.6rem; */
-  width: 35%;
-  height: 25%;
+.coin-row .trade-on a {
+  font-variant: all-small-caps;
 }
 
-.roid-cat a img:hover {
-  border: 1px solid #888888;
-  border-radius: 80% 60% 80% 60%;
-  box-shadow: 5px 10px #888888;
+.roid-cat img {
+  border-radius: 25% 25%;
+/*  border-radius: 50% 55% 70% 60%;*/
+  /* margin: 1.6rem; */
+  width: 50%;
+  margin:auto;
+  animation-name: zoomIn;
+  animation-duration: 2s;
+}
+
+@keyframes zoomIn {
+  from { width:30%; }
+  to { width:50%; }
+}
+
+.roid-cat img:hover {
+/*  border: 1px solid #888888;*/
+/*  border-radius: 80% 60% 80% 60%;*/
+/*  box-shadow: 5px 10px #888888;*/
+  filter: drop-shadow(30px 10px 4px #888888);
+  cursor: pointer;
+  transition: 0.1s ease-in-out;
 }
 
 .content-row {
@@ -169,22 +200,21 @@ content h3 ol {
   text-align: center !important;
   margin: auto !important;
 }
-.home-page-wrapper h1 {
+.home-page-title {
   border: 1px solid;
   padding: 10px;
   box-shadow: 5px 10px #888888;
+  font-size: 2.4rem ;
 }
 
-.dev-langs-list a, .dev-langs-list a:hover, .dev-langs-list a:visited, .dev-langs-list a:focus, .dev-langs-list a:active  {
-  text-decoration: none;
-  color: inherit;
-  outline: 0;
-  cursor: pointer;
+.dev-langs-list li {
+  list-style: none;
 }
 
-.dev-langs-list a:hover {
-  color: #666;
-  transition: 0.1s ease-in;
+.personal-email {
+  font-family: monospace;
+  font-weight: bolder;
+  font-size: 1.2rem;
 }
 
 /* ============== */
