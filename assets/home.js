@@ -4,9 +4,9 @@ window.addEventListener("load", () => {
     //======================//
     // * HOME PAGE EVENTS * //
     //======================//
-    const roidCatImg  = document.getElementsByClassName('roid-cat-img')[0],
-        homePageBtn   = document.querySelector('.home-page'),
-        myRepo        = 'https://github.com/e-goat/jquery-gecko-api',
+    const roidCatImg = document.getElementsByClassName('roid-cat-img')[0],
+        homePageBtn = document.querySelector('.home-page'),
+        myRepo = 'https://github.com/e-goat/jquery-gecko-api',
         homePageTitle = document.getElementsByClassName('home-page-title')[0];
 
     homePageBtn.click();
@@ -22,5 +22,4 @@ window.addEventListener("load", () => {
     roidCatImg.addEventListener('click', () => {
         return window.open(myRepo);
     });
-
 });
